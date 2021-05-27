@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mqconsumer:war">
+    <output-path>$PROJECT_DIR$/mqconsumer/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>mqconsumer</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="mqconsumer.war">
+      <element id="artifact" artifact-name="mqconsumer:war exploded" />
+    </root>
+  </artifact>
+</component>

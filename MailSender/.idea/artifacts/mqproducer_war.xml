@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mqproducer:war">
+    <output-path>$PROJECT_DIR$/mqproducer/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>mqproducer</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="mqproducer.war">
+      <element id="artifact" artifact-name="mqproducer:war exploded" />
+    </root>
+  </artifact>
+</component>
