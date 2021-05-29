@@ -22,7 +22,7 @@
 
 <script>
 import {mixin} from "../mixins/index";
-import {ifExist,addUser} from "../api/index";
+import {ifExist,addUser,sendEmail} from "../api/index";
 import 'url-search-params-polyfill';
 export default {
   mixins:[mixin],
@@ -53,10 +53,26 @@ export default {
                     this.notify("用户已存在","error");
                 }
                 else{
-                    this.signUp();
+                    
+                    this.SendMail();
                 }
             })
         },
+      SendMail(){
+          let params=new URLSearchParams();
+          params.append('username',this.userForm.username);
+          params.append('email',this.userForm.email);
+          sendEmail(params).then(res =>{
+                if(res.code==0){
+                    this.notify("邮件发送失败","error");
+                }
+                else{
+                    this.notify("邮件已发送","success");
+                    this.signUp();
+                }
+            })
+
+      },
       signUp(){
     
             let params=new URLSearchParams();
@@ -77,6 +93,7 @@ export default {
                 console.log(err);
             });
         },
+      
       
   }
 }

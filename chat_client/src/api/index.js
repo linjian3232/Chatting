@@ -15,6 +15,7 @@ export const adminOfName = (name) => get(`/admin/verifyExist?name=${name}`);
 //====================注册相关=======================
 export const ifExist = (userName) => get(`/user/ifExist?userName=${userName}`);
 export const addUser= (params) => post(`/user/signUp`,params);
+export const sendEmail = (params) => get(`/sendSimpleMail`,params);
 //====================上传者相关=======================
 
 //查询歌手
