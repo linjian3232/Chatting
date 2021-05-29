@@ -23,14 +23,14 @@
 
 <script>
 import {mixin} from "../mixins/index";
-import {getLoginStatus} from "../api/index";
+import {Login} from "../api/index";
 import 'url-search-params-polyfill';
 export default {
   mixins:[mixin],
   data: function(){
     return {
       ruleForm:{
-        username: "admin",
+        username: "super",
         password: "123"
       },
       rules:{
@@ -48,43 +48,22 @@ export default {
       this.$router.push("/SignUp");
     },
     submitForm(){
-      
+      console.log(this.ruleForm.username);
       let params = new URLSearchParams();
-      params.append("name",this.ruleForm.username);
+      params.append("userName",this.ruleForm.username);
       params.append("password",this.ruleForm.password);
       let username= this.ruleForm.username;
       
-      getLoginStatus(params)
+    Login(params)
       .then((res) =>{
-        if(res.code == 1){
+         if(res.code == 1){
           // vue提供的一个缓存机制，类似一个map
           localStorage.setItem('userName',this.ruleForm.username)
-          localStorage.setItem('level','1')
-          this.$router.push("/Uploader");
-          this.notify("登录成功"+"\n"+"上传者界面","success");
+          localStorage.setItem('email',this.ruleForm.email)
+          this.$router.push("/Info");
+          this.notify("登录成功","success");
         }
-         if(res.code == 2){
-          // vue提供的一个缓存机制，类似一个map
-          localStorage.setItem('userName',this.ruleForm.username)
-          localStorage.setItem('level','2')
-          this.$router.push("/Reviewer");
-          this.notify("登录成功"+"\n"+"一级审核者界面:","success");
-        }
-         if(res.code == 3){
-          // vue提供的一个缓存机制，类似一个map
-          localStorage.setItem('userName',this.ruleForm.username)
-          localStorage.setItem('level','3')
-          this.$router.push("/Teminator");
-          this.notify("登录成功"+"\n"+"二级审核者界面","success");
-        }
-        if(res.code == 4){
-          // vue提供的一个缓存机制，类似一个map
-          localStorage.setItem('userName',this.ruleForm.username)
-          localStorage.setItem('level','4')
-          this.$router.push("/Consumer");
-          this.notify("登录成功"+"\n"+"超级管理员界面","success");
-        }
-        else if(res.code==0){
+        else if(res.code==0||res.code==-1){
           this.notify(res.msg,"error");
         }
       });

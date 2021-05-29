@@ -8,9 +8,7 @@
                 <el-form-item prop="name" label="用户名">
                      <el-input v-model="registerForm.name" placeholder="用户名" ></el-input>
                 </el-form-item>
-                <el-form-item label="权限等级" width="250" align="center">
-                     <el-input v-model="registerForm.level" placeholder="权限等级" ></el-input>
-            </el-form-item>
+        
             </el-form>
         </div>
     </div>
@@ -23,7 +21,6 @@ export default {
         return{
             registerForm:{ //添加框
                 name:localStorage.getItem('userName'),
-                level:localStorage.getItem('level'),
             }
             }
     }

@@ -11,6 +11,10 @@
         </el-form-item>
          <el-form-item prop="email" label="邮箱">
           <el-input type="email" v-model="userForm.email" placeholder="邮箱"></el-input>
+          <el-button type="mini" @click="SendMail()">获取验证码</el-button>
+        </el-form-item>
+        <el-form-item prop="verifyCode" label="验证码">
+          <el-input v-model="userForm.verifyCode" placeholder="验证码"></el-input>
         </el-form-item>
         <div class="login-btn">
           <el-button type="primary" @click="beforeAddUser(userForm.username)">注册</el-button>
@@ -31,7 +35,8 @@ export default {
       userForm:{
         username: "",
         password: "",
-        email: ""
+        email: "",
+        verifyCode: ""
       },
       regulation:{
         username:[
@@ -42,23 +47,36 @@ export default {
         ],
         email:[
           {required:true,message:"请输入邮箱",trigger:"blur"}
+        ],
+        verifyCode:[
+          {required:true,message:"请输入验证码",trigger:"blur"}
         ]
       }
     };
   },
   methods:{
-      beforeAddUser(userName){         
+      beforeAddUser(userName){  
+        console.log("邮箱"+this.userForm.email);  
+        if(this.userForm.username==""||this.userForm.password==""||this.userForm.email==""||this.userForm.verifyCode=="") {
+          this.notify("请填写完整信息","error");
+        }    
+        else{
             ifExist(userName).then(res =>{
                 if(res.code==1){
                     this.notify("用户已存在","error");
                 }
                 else{
                     
-                    this.SendMail();
+                    this.signUp();
                 }
             })
+        }
         },
       SendMail(){
+         if(this.userForm.username==""||this.userForm.password==""||this.userForm.email=="") {
+          this.notify("请填写完整信息","error");
+        }    
+        else{
           let params=new URLSearchParams();
           params.append('username',this.userForm.username);
           params.append('email',this.userForm.email);
@@ -68,9 +86,9 @@ export default {
                 }
                 else{
                     this.notify("邮件已发送","success");
-                    this.signUp();
                 }
             })
+        }
 
       },
       signUp(){
@@ -79,10 +97,14 @@ export default {
             params.append('username',this.userForm.username);
             params.append('password',this.userForm.password);
             params.append('email',this.userForm.email);
-      
+            params.append('verifyCode',this.userForm.verifyCode);
+
             addUser(params)
             .then(res =>{
-                if(res.code == 1)              {
+                if(res.code==-1){
+                  this.notify(res.msg,"error");
+                }
+                else if(res.code == 1)              {
                     this.notify("注册成功","success");
                     this.$router.push("/");
                 }else{
@@ -111,7 +133,7 @@ export default {
 }
 .ms-title {
   position: absolute;
-  top: 50%;
+  top: 40%;
   width: 100%;
   margin-top: -230px;
   text-align: center;
@@ -123,9 +145,9 @@ export default {
 .ms-login {
   position: absolute;
   left: 50%;
-  top: 50%;
-  width: 300px;
-  height: 350px;
+  top: 40%;
+  width: 350px;
+  height: 470px;
   /* 左移150 */
   margin-left: -190px;
   margin-top: -150px;
@@ -138,7 +160,7 @@ export default {
   text-align: center;
 }
 .login-btn button {
-  width: 100%;
+  width: 70%;
   height: 36px;
 }
 </style>

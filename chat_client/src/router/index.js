@@ -30,14 +30,7 @@ export default new Router({
           path: '/Uploader',
           component: resolve => require(['../pages/UploaderPage.vue'], resolve)
         },
-        {
-          path: '/Unreview',
-          component: resolve => require(['../pages/UnreviewPage.vue'], resolve)
-        },
-        {
-          path: '/Review',
-          component: resolve => require(['../pages/ReviewPage.vue'], resolve)
-        },
+      
         {
           path: '/Reviewer',
           component: resolve => require(['../pages/Reviewer.vue'], resolve)
@@ -45,30 +38,6 @@ export default new Router({
         {
           path: '/Teminator',
           component: resolve => require(['../pages/Teminator.vue'], resolve)
-        },
-        {
-          path: '/PersonalFile',
-          component: resolve => require(['../pages/PersonalFilePage.vue'], resolve)
-        }
-        ,
-        {
-          path: '/Refuse',
-          component: resolve => require(['../pages/RefusePage.vue'], resolve)
-        }
-        ,
-        {
-          path: '/Agree',
-          component: resolve => require(['../pages/AgreePage.vue'], resolve)
-        }
-        ,
-        {
-          path: '/Disagree',
-          component: resolve => require(['../pages/DisagreePage.vue'], resolve)
-        }
-        ,
-        {
-          path: '/Wait',
-          component: resolve => require(['../pages/WaitPage.vue'], resolve)
         }
       ]
     }

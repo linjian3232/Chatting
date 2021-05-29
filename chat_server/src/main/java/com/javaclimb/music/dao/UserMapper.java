@@ -41,4 +41,6 @@ public interface UserMapper {
      */
     public int ifExist(String userName);
 
+    public int login(String userName,String password);
+
 }

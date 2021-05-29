@@ -72,6 +72,11 @@
         select count(*) from user where user_name=#{userName}
     </select>
 
+    <select id="login" resultType="java.lang.Integer">
+-- #后边跟着的数字是传入参数的序号
+        select count(*) from user where user_name=#{userName} and password=#{password}
+    </select>
+
 
 
     <select id="getAllUser"  resultMap="BaseResultMap" parameterType="java.lang.Integer">

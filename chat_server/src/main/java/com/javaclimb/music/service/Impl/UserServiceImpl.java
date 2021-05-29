@@ -6,6 +6,8 @@ import com.javaclimb.music.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -39,4 +41,11 @@ public class UserServiceImpl implements UserService {
     public boolean delete(Integer id) {
         return userMapper.delete(id)>0;
     }
+
+    @Override
+    public int login(String username, String password) {
+        return userMapper.login(username,password);
+    }
+
+
 }

@@ -44,17 +44,17 @@ export default {
                  {
                     icon: 'el-icon-document',
                     index: 'Uploader',
-                    title: '上传者管理'
+                    title: '1号联系人'
                 },
                 {
                     icon: 'el-icon-document',
                     index: 'Reviewer',
-                    title: '一级审核者'
+                    title: '2号联系人'
                 },
                  {
                     icon: 'el-icon-document',
                     index: 'Teminator',
-                    title: '二级审核者'
+                    title: '3号联系人'
                 }
 
             ]
